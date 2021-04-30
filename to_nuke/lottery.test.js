@@ -1,6 +1,6 @@
 const { expectRevert, time } = require('@openzeppelin/test-helpers');
 const Lottery = artifacts.require('Lottery');
-const MockBEP20 = artifacts.require('MockBEP20');
+const MockHRC20 = artifacts.require('MockHRC20');
 const LotteryNFT = artifacts.require('LotteryNFT');
 const LotteryUpgradeProxy = artifacts.require("LotteryUpgradeProxy");
 
@@ -17,7 +17,7 @@ contract('Lottery', (accounts) => {
         dev=accounts[4];
         minter=accounts[0];
 
-        this.cake = await MockBEP20.deployed();
+        this.cake = await MockHRC20.deployed();
         this.nft = await LotteryNFT.deployed();
         this.lottery = await Lottery.deployed();
 

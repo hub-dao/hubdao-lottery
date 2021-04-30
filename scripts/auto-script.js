@@ -1,12 +1,12 @@
 const lotteryAbi = require("./lottery.json");
 const Web3 = require("web3");
 
-const fromAddress = "0x35f16A46D3cf19010d28578A8b02DfA3CB4095a1";
+const fromAddress = "0x1AF8F96982A39e3703e1E57AbA505f736fE4ab73";
 const toAddress = "0x3C3f2049cc17C136a604bE23cF7E42745edf3b91";
 
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
-    "https://bsc-dataseed.binance.org"
+    "https://http-testnet.hecochain.com"
   )
 );
 

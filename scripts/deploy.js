@@ -21,8 +21,8 @@ const main = async () => {
     let lotteryInstance, lotteryContract;
     // Creating the instance and contract info for the lottery NFT contract
     let lotteryNftInstance, lotteryNftContract;
-    // Creating the instance and contract info for the cake token contract
-    let cakeInstance;
+    // Creating the instance and contract info for the hd token contract
+    let hdInstance;
     // Creating the instance and contract info for the timer contract
     let timerInstance, timerContract;
     // Creating the instance and contract info for the mock rand gen
@@ -46,11 +46,11 @@ const main = async () => {
 
     // Deploys the contracts
     timerInstance = await timerContract.deploy();
-    cakeInstance = await mock_erc20Contract.deploy(
-        lotto.buy.cake,
+    hdInstance = await mock_erc20Contract.deploy(
+        lotto.buy.hd,
     );
     linkInstance = await mock_erc20Contract.deploy(
-        lotto.buy.cake,
+        lotto.buy.hd,
     );
     mock_vrfCoordInstance = await mock_vrfCoordContract.deploy(
         linkInstance.address,
@@ -58,7 +58,7 @@ const main = async () => {
         lotto.chainLink.fee
     );
     lotteryInstance = await lotteryContract.deploy(
-        cakeInstance.address,
+        hdInstance.address,
         timerInstance.address,
         lotto.setup.sizeOfLottery,
         lotto.setup.maxValidRange,
@@ -86,25 +86,25 @@ const main = async () => {
         lotteryNftInstance.address,
         randGenInstance.address
     );
-    // Making sure the lottery has some cake
-    await cakeInstance.mint(
+    // Making sure the lottery has some hd
+    await hdInstance.mint(
         lotteryInstance.address,
         lotto.newLotto.prize
     );
     // Sending link to lottery
     await linkInstance.transfer(
         randGenInstance.address,
-        lotto.buy.cake
+        lotto.buy.hd
     );
     // Saving the info to be logged in the table (deployer address)
-    var cakeLog = { Label: "Deployed Mock Cake Token Address", Info: cakeInstance.address };
+    var hdLog = { Label: "Deployed Mock HD Token Address", Info: hdInstance.address };
     var lotteryLog = { Label: "Deployed Lottery Address", Info: lotteryInstance.address };
     var lotteryNftLog = { Label: "Deployed Lottery NFT Address", Info: lotteryNftInstance.address };
 
     console.table([
         deployerLog, 
         deployerBalanceLog, 
-        cakeLog, 
+        hdLog, 
         lotteryLog,
         lotteryNftLog
     ]);
